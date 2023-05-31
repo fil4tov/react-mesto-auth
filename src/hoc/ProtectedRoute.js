@@ -9,10 +9,10 @@ const ProtectedRoute = ({element}) => {
   const {isLoading, isAuth} = React.useContext(AuthContext)
 
   if (isLoading) {
-    return <Loader/>
+    return <Loader isLoading/>
   }
 
-  return isAuth ? element : <Navigate to={appRoutes.signIn.path} />
+  return isAuth ? element : <Navigate to={appRoutes.signIn.path} replace />
 };
 
 

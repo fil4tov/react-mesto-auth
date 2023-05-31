@@ -6,12 +6,14 @@ import {ButtonSubmit, Input} from "./ui";
 import {usePopup, useSubmitButton, useValidation} from "../hooks";
 import {AuthService} from "../api/AuthService";
 import {appRoutes} from "../utils/consts";
+import Loader from "./Loader";
 
 const Register = () => {
   const email = useValidation('')
   const password = useValidation('')
   const [successful, setSuccessful] = React.useState(false);
   const [navigatePathOnClose, setNavigatePathOnClose] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
   const toolTip = usePopup({initialIsOpen: false})
   const navigate = useNavigate()
   const {isSubmitDisabled} = useSubmitButton({
@@ -20,6 +22,7 @@ const Register = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
+    setIsLoading(true)
     AuthService.register({
       email: email.value,
       password: md5(password.value)
@@ -33,6 +36,9 @@ const Register = () => {
         toolTip.open()
         setSuccessful(false)
         setNavigatePathOnClose(appRoutes.signUp.path)
+      })
+      .finally(() => {
+        setIsLoading(false)
       })
   }
 
@@ -103,6 +109,8 @@ const Register = () => {
         successText='Вы успешно зарегистрировались!'
         failText='Вы ввели некорректный email или такой пользователь уже существует.'
       />
+
+      <Loader isLoading={isLoading}/>
     </>
   );
 };

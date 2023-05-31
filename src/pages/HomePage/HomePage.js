@@ -4,7 +4,6 @@ import EditAvatarPopup from "../../components/EditAvatarPopup";
 import AddPlacePopup from "../../components/AddPlacePopup";
 import ConfirmDeletePopup from "../../components/ConfirmDeletePopup";
 import PopupWithImage from "../../components/PopupWithImage";
-import Header from "../../components/Header";
 import ErrorBlock from "../../components/ErrorBlock";
 import Main from "../../components/Main";
 import {usePopup} from "../../hooks";

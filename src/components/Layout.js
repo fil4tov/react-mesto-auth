@@ -9,7 +9,7 @@ const Layout = () => {
     <>
       <Header/>
       <main className='main'>
-        <Suspense fallback={<Loader/>}>
+        <Suspense fallback={<Loader isLoading/>}>
           <Outlet/>
         </Suspense>
       </main>

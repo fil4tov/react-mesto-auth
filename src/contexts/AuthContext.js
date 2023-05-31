@@ -7,8 +7,8 @@ export const AuthContext = React.createContext({})
 export const AuthProvider = ({children}) => {
   const [isAuth, setIsAuth] = React.useState(false);
   const [user, setUser] = React.useState({});
-  const hasUserData = React.useRef(false)
   const [isLoading, setIsLoading] = React.useState(true);
+  const hasUserData = React.useRef(false)
 
   React.useEffect(() => {
     if (getJWT() && !hasUserData.current) {
@@ -42,7 +42,6 @@ export const AuthProvider = ({children}) => {
     setIsAuth(true)
     hasUserData.current = true
   }
-
 
   const store = React.useMemo(() => {
     return {

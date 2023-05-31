@@ -32,7 +32,7 @@ const Header = () => {
 
   return (
     <header className={classNames(['header'], {
-      ['header_menu-opened']: isMenuOpen
+      ['header_menu-opened']: isMenuOpen && isAuth
     })}>
       <a href={appRoutes.home.path}>
         <img src={headerLogo} alt="Логотип сайта" className="logo"/>
