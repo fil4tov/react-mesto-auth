@@ -1,8 +1,9 @@
 import {
-  createBrowserRouter,
-  createRoutesFromElements, Navigate,
+  createBrowserRouter, createHashRouter,
+  createRoutesFromElements,
+  Navigate,
   Route,
-  RouterProvider,
+  RouterProvider
 } from "react-router-dom";
 import Layout from "./Layout";
 import {HomePage, SignUpPage, SignInPage} from "../pages";
@@ -10,7 +11,7 @@ import ProtectedRoute from "../hoc/ProtectedRoute";
 import {AuthProvider, CurrentUserProvider} from "../contexts";
 import {appRoutes} from "../utils/consts";
 
-const router = createBrowserRouter(createRoutesFromElements(
+const router = createHashRouter(createRoutesFromElements(
   <Route element={<Layout/>}>
     <Route index element={<ProtectedRoute element={<HomePage/>}/>}/>
     <Route path={appRoutes.signIn.path} element={<SignInPage/>}/>

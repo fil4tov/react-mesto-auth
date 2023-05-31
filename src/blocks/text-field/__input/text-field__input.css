@@ -13,3 +13,10 @@
 .text-field__input::placeholder {
   color: #C4C4C4;
 }
+
+.text-field__input:-webkit-autofill,
+.text-field__input:-webkit-autofill:hover,
+.text-field__input:-webkit-autofill:focus,
+.text-field__input:-webkit-autofill:active {
+  transition-delay: 99999s;
+}

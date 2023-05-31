@@ -54,7 +54,6 @@ const Header = () => {
             : <MenuIcon onClick={handleToggleMenu} className='header__icon'/>}
         </>
         : <Link className='header__link' to={linkPath}>{linkText}</Link>}
-
     </header>
   );
 };
