@@ -4,7 +4,7 @@
 
 ## Используемые технологии
 - React
-- JavaScript
+- React Router Dom
 - БЭМ нейминг
 - Файловая структура БЭМ Nested
 - Flexbox
@@ -16,4 +16,4 @@
 - и тд
 
 ## Проект
-Проект можно посмотреть по [ссылке](https://fil4tov.github.io/mesto-react/)
+Проект можно посмотреть по [ссылке](https://fil4tov.github.io/react-mesto-auth/)
