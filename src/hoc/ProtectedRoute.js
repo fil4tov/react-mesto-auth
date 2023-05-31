@@ -1,11 +1,12 @@
+import React from "react";
 import {Navigate} from "react-router-dom";
 import Loader from "../components/Loader";
-import {useCheckAuth} from "../hooks";
 import {appRoutes} from "../utils/consts";
+import {AuthContext} from "../contexts";
 
 
 const ProtectedRoute = ({element}) => {
-  const {isLoading, isAuth} = useCheckAuth()
+  const {isLoading, isAuth} = React.useContext(AuthContext)
 
   if (isLoading) {
     return <Loader/>

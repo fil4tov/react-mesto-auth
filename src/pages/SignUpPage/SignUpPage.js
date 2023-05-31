@@ -1,13 +1,14 @@
+import React from "react";
 import Register from "../../components/Register";
-import {useCheckAuth} from "../../hooks";
 import {Navigate} from "react-router-dom";
 import {appRoutes} from "../../utils/consts";
+import {AuthContext} from "../../contexts";
 
 const SignUpPage = () => {
-  const {isAuth} = useCheckAuth()
+  const {isAuth} = React.useContext(AuthContext)
 
   if (isAuth) {
-    return <Navigate to={appRoutes.home.path} />
+    return <Navigate to={appRoutes.home.path} replace />
   }
 
   return (

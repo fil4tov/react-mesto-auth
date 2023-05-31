@@ -4,7 +4,6 @@ import md5 from 'md5'
 import InfoTooltip from "./InfoTooltip";
 import {ButtonSubmit, Input} from "./ui";
 import {usePopup} from "../hooks";
-import {setJWT} from "../utils/helpers";
 import {AuthContext} from "../contexts";
 import {AuthService} from "../api/AuthService";
 import {appRoutes} from "../utils/consts";
@@ -14,7 +13,7 @@ const Login = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [successful, setSuccessful] = React.useState(false);
-  const {setIsAuth} = React.useContext(AuthContext)
+  const {handleLogin} = React.useContext(AuthContext)
   const toolTip = usePopup({initialIsOpen: false})
   const navigate = useNavigate()
   const inputRef = React.useRef(null)
@@ -22,9 +21,8 @@ const Login = () => {
   const handleSubmit = e => {
     e.preventDefault()
     AuthService.login({email, password: md5(password)})
-      .then(res => {
-        setJWT(res.token)
-        setIsAuth(true)
+      .then(({token}) => {
+        handleLogin(token)
         navigate(appRoutes.home.path, {replace: true})
       })
       .catch(() => {

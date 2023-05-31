@@ -21,6 +21,7 @@
 @import url(./blocks/header/__button/header__button.css);
 @import url(./blocks/header/__email/header__email.css);
 @import url(./blocks/header/__icon/header__icon.css);
+@import url(./blocks/header/_menu-opened/header_menu-opened.css);
 @import url(./blocks/logo/logo.css);
 
 @import url(./blocks/profile/profile.css);

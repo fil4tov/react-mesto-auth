@@ -1,19 +1,58 @@
 import React from "react";
+import {getJWT, setJWT, unsetJWT} from "../utils/helpers";
+import {AuthService} from "../api/AuthService";
 
 export const AuthContext = React.createContext({})
 
 export const AuthProvider = ({children}) => {
   const [isAuth, setIsAuth] = React.useState(false);
   const [user, setUser] = React.useState({});
+  const hasUserData = React.useRef(false)
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    if (getJWT() && !hasUserData.current) {
+      AuthService.checkAuth()
+        .then(({data}) => {
+          handleCheckAuth(data)
+        })
+        .catch(console.log)
+        .finally(() => {
+          setIsLoading(false)
+        })
+    } else {
+      setIsLoading(false)
+    }
+  }, [isAuth]);
+
+  const handleLogout = () => {
+    unsetJWT()
+    setUser({})
+    setIsAuth(false)
+    hasUserData.current = false
+  }
+
+  const handleLogin = (jwt) => {
+    setJWT(jwt)
+    setIsAuth(true)
+  }
+
+  const handleCheckAuth = (userData) => {
+    setUser(userData)
+    setIsAuth(true)
+    hasUserData.current = true
+  }
+
 
   const store = React.useMemo(() => {
     return {
       user,
-      setUser,
       isAuth,
-      setIsAuth
+      isLoading,
+      handleLogout,
+      handleLogin
     }
-  }, [user, isAuth])
+  }, [user, isAuth, isLoading])
 
   return (
     <AuthContext.Provider value={store}>
