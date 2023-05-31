@@ -2,11 +2,11 @@ import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 import {CurrentUserContext} from "../contexts";
 import {useSubmitButton, useValidation} from "../hooks";
-import {useValidationConfig} from "../utils/consts";
+import {Input} from "./ui";
 
 const EditAvatarPopup = ({isOpen, onClose, onSubmit}) => {
   const {setCurrentUser} = React.useContext(CurrentUserContext)
-  const avatar = useValidation(useValidationConfig)
+  const avatar = useValidation('')
   const {
     setIsLoading,
     buttonText,
@@ -56,18 +56,19 @@ const EditAvatarPopup = ({isOpen, onClose, onSubmit}) => {
       isSubmitDisabled={isSubmitDisabled}
       onSubmit={handleSubmit}
     >
-      <label className="popup__field">
-        <input
-          value={avatar.value}
-          onChange={avatar.onChange}
-          ref={avatar.ref}
-          className={avatar.inputClassName}
-          type="url"
-          placeholder="Ссылка на аватар"
-          required
-        />
-        <span className="popup__input-error">{avatar.error}</span>
-      </label>
+
+      <Input
+        className='popup__field'
+        value={avatar.value}
+        onChange={avatar.onChange}
+        ref={avatar.ref}
+        error={Boolean(avatar.error)}
+        errorMessage={avatar.error}
+        type="url"
+        placeholder="Ссылка на аватар"
+        required
+      />
+
     </PopupWithForm>
   );
 };

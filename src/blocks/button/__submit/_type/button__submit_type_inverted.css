@@ -1,0 +1,9 @@
+.button__submit_type_inverted {
+  background-color: #fff;
+  color: #000;
+}
+
+.button__submit_type_inverted:disabled {
+  border: 1px solid #fff;
+  color: #fff;
+}

@@ -1,11 +1,11 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 import {useSubmitButton, useValidation} from "../hooks";
-import {useValidationConfig} from "../utils/consts";
+import {Input} from "./ui";
 
 const AddPlacePopup = ({isOpen, onClose, onSubmit, cards, setCards}) => {
-  const name = useValidation(useValidationConfig)
-  const link = useValidation(useValidationConfig)
+  const name = useValidation('')
+  const link = useValidation('')
   const {
     setIsLoading,
     buttonText,
@@ -56,33 +56,32 @@ const AddPlacePopup = ({isOpen, onClose, onSubmit, cards, setCards}) => {
       onSubmit={handleSubmit}
       isSubmitDisabled={isSubmitDisabled}
     >
-      <label className="popup__field">
-        <input
-          value={name.value}
-          onChange={name.onChange}
-          ref={name.ref}
-          className={name.inputClassName}
-          type="text"
-          placeholder="Место"
-          minLength="2"
-          maxLength="30"
-          required
-        />
-        <span className='popup__input-error'>{name.error}</span>
-      </label>
 
-      <label className="popup__field">
-        <input
-          value={link.value}
-          onChange={link.onChange}
-          ref={link.ref}
-          className={link.inputClassName}
-          type="url"
-          placeholder="Ссылка на картинку"
-          required
-        />
-        <span className="popup__input-error">{link.error}</span>
-      </label>
+      <Input
+        value={name.value}
+        onChange={name.onChange}
+        ref={name.ref}
+        error={Boolean(name.error)}
+        errorMessage={name.error}
+        type="text"
+        placeholder="Место"
+        minLength="2"
+        maxLength="30"
+        required
+      />
+
+      <Input
+        className='popup__field'
+        value={link.value}
+        onChange={link.onChange}
+        ref={link.ref}
+        error={Boolean(link.error)}
+        errorMessage={link.error}
+        type="url"
+        placeholder="Ссылка на картинку"
+        required
+      />
+
     </PopupWithForm>
   );
 };

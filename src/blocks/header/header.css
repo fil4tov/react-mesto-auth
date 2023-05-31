@@ -1,3 +1,11 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
 .header::after {
   display: block;
   content: '';
@@ -6,8 +14,9 @@
   background-color: var(--header-line-color);
   margin: 40px 0;
 }
+
 @media screen and (max-width: 767px) {
   .header::after {
-    margin: 28px 0 42px;
+    margin: 30px 0 42px;
   }
 }

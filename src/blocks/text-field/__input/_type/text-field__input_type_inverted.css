@@ -1,0 +1,5 @@
+.text-field__input_type_inverted {
+  background-color: transparent;
+  color: var(--main-text-color);
+  border-bottom: 1px solid #ccc;
+}

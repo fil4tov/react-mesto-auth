@@ -1,5 +1,6 @@
 import React from 'react';
 import {CurrentUserContext} from "../contexts";
+import {classNames} from "../utils/helpers";
 
 const Card = React.memo(({
   _id,
@@ -14,9 +15,6 @@ const Card = React.memo(({
   const {currentUser} = React.useContext(CurrentUserContext)
   const isOwner = currentUser._id === owner._id
   const isLiked = likes.some(item => item._id === currentUser._id)
-  const cardLikeButtonClassName = (
-    `button card__like-button ${isLiked ? 'card__like-button_active' : ''}`
-  )
 
   const handleDeleteCard = () => {
     onCardDelete(_id)
@@ -43,7 +41,7 @@ const Card = React.memo(({
         <div className="card__like">
           <button
             onClick={handleLikeCard}
-            className={cardLikeButtonClassName}
+            className={classNames(['button card__like-button'], {['card__like-button_active']: isLiked})}
             type="button"
             aria-label="Поставить лайк"
           />

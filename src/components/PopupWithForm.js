@@ -1,5 +1,7 @@
 import React from 'react';
 import {usePopupCloseListeners} from "../hooks";
+import {classNames} from "../utils/helpers";
+import {ButtonSubmit} from "./ui";
 
 const PopupWithForm = ({
   name,
@@ -11,39 +13,54 @@ const PopupWithForm = ({
   onSubmit,
   isSubmitDisabled
 }) => {
-  const {handleCloseOnOverlay} = usePopupCloseListeners(isOpen, onClose)
+  const {
+    handleCloseOnOverlay,
+    onAnimationEnd,
+    isVisible
+  } = usePopupCloseListeners(isOpen, onClose)
 
   return (
-    <div
-      onMouseDown={handleCloseOnOverlay}
-      className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`}
-    >
-      <div className="popup__container">
-        <h2 className="popup__title">{title}</h2>
-        <form
-          onSubmit={onSubmit}
-          name={name}
-          className="popup__form"
-          autoComplete="off"
+    <>
+      {isVisible && (
+        <div
+          onMouseDown={handleCloseOnOverlay}
+          onAnimationEnd={onAnimationEnd}
+          className={classNames(['popup', `popup_type_${name}`], {['popup_opened']: isOpen})}
         >
-          {children}
-          <button
-            disabled={isSubmitDisabled}
-            className="button popup__submit"
-            type="submit"
-            aria-label={buttonText}
-          >
-            {buttonText}
-          </button>
-        </form>
-        <button
-          onClick={onClose}
-          className="button popup__close"
-          type="button"
-          aria-label="Закрыть модальное окно"
-        />
-      </div>
-    </div>
+          <div className="popup__container">
+
+            <h2 className="popup__title">{title}</h2>
+
+            <form
+              onSubmit={onSubmit}
+              name={name}
+              className="popup__form"
+              autoComplete="off"
+            >
+
+              {children}
+
+              <ButtonSubmit
+                disabled={isSubmitDisabled}
+                type="submit"
+                aria-label={buttonText}
+              >
+                {buttonText}
+              </ButtonSubmit>
+
+            </form>
+
+            <button
+              onClick={onClose}
+              className="button popup__close"
+              type="button"
+              aria-label="Закрыть модальное окно"
+            />
+
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

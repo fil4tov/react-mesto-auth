@@ -2,9 +2,25 @@
 @import url(./assets/vendor/variables/variables.css);
 @import url(./assets/vendor/fonts/fonts.css);
 @import url(./blocks/root/root.css);
+
+@import url(./blocks/icon/icon.css);
+
+@import url(./blocks/text-field/text-field.css);
+@import url(./blocks/text-field/__error/text-field__error.css);
+@import url(./blocks/text-field/__input/text-field__input.css);
+@import url(./blocks/text-field/__input/_type/text-field__input_type_inverted.css);
+@import url(./blocks/text-field/__input/_type/text-field__input_type_error.css);
+
 @import url(./blocks/button/button.css);
+@import url(./blocks/button/__submit/button__submit.css);
+@import url(./blocks/button/__submit/_type/button__submit_type_inverted.css);
 
 @import url(./blocks/header/header.css);
+@import url(./blocks/header/__link/header__link.css);
+@import url(./blocks/header/__user-info/header__user-info.css);
+@import url(./blocks/header/__button/header__button.css);
+@import url(./blocks/header/__email/header__email.css);
+@import url(./blocks/header/__icon/header__icon.css);
 @import url(./blocks/logo/logo.css);
 
 @import url(./blocks/profile/profile.css);
@@ -36,12 +52,8 @@
 @import url(./blocks/popup/popup.css);
 @import url(./blocks/popup/__close/popup__close.css);
 @import url(./blocks/popup/__container/popup__container.css);
-@import url(./blocks/popup/__input/popup__input.css);
-@import url(./blocks/popup/__input/_type/popup__input_type_error.css);
 @import url(./blocks/popup/__input-error/popup__input-error.css);
 @import url(./blocks/popup/__field/popup__field.css);
-@import url(./blocks/popup/__submit/popup__submit.css);
-@import url(./blocks/popup/__submit/_confirm/popup__submit_confirm.css);
 @import url(./blocks/popup/__title/popup__title.css);
 @import url(./blocks/popup/__form/popup__form.css);
 @import url(./blocks/popup/__container/_image/popup__container_image.css);
@@ -54,3 +66,16 @@
 @import url(./blocks/hide/hide.css);
 
 @import url(./blocks/error-block/__title/error-block__title.css);
+
+@import url(./blocks/form/form.css);
+@import url(./blocks/form/__title/form__title.css);
+@import url(./blocks/form/__title/_inverted/form__title_inverted.css);
+@import url(./blocks/form/__submit/form__submit.css);
+@import url(./blocks/form/__link/form__link.css);
+
+@import url(./blocks/tooltip/tooltip.css);
+@import url(./blocks/tooltip/__image/tooltip__image.css);
+@import url(./blocks/tooltip/__text/.tooltip__text.css);
+
+@import url(./blocks/loader/loader.css);
+@import url(./blocks/loader/__circle/loader__circle.css);

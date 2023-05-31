@@ -1,5 +1,15 @@
 import React from "react";
 const usePopupCloseListeners = (isOpen, handleClose) => {
+  const [isVisible, setIsVisible] = React.useState(isOpen);
+
+  React.useEffect(() => {
+    if (isOpen) setIsVisible(true)
+  }, [isOpen]);
+
+  const onAnimationEnd = () => {
+    if (!isOpen) setIsVisible(false)
+  }
+
   const handleCloseOnOverlay = e => {
     if (e.target.classList.contains('popup')) {
       handleClose()
@@ -17,7 +27,7 @@ const usePopupCloseListeners = (isOpen, handleClose) => {
     return () => document.removeEventListener('keydown', handleCloseOnEsc)
   }, [isOpen]);
 
-  return {handleCloseOnOverlay}
+  return {handleCloseOnOverlay, onAnimationEnd, isVisible}
 }
 
 export default usePopupCloseListeners

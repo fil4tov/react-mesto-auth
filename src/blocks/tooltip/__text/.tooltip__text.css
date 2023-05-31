@@ -1,0 +1,15 @@
+.tooltip__text {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: var(--popup-text-color);
+  margin: 32px 0 0;
+}
+
+@media screen and (max-width: 767px) {
+  .tooltip__text {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}

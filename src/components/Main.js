@@ -12,7 +12,7 @@ const Main = ({
   const {currentUser: {name, avatar, about}} = React.useContext(CurrentUserContext)
 
   return (
-    <main className="main">
+    <>
       <section className="profile">
         <div
           onClick={onEditAvatar}
@@ -36,6 +36,7 @@ const Main = ({
           type="button"
           aria-label="Добавить пост"/>
       </section>
+
       <section className="gallery" aria-label="Посты пользователя">
         {cards.map(card => (
           <Card
@@ -45,7 +46,7 @@ const Main = ({
           />
         ))}
       </section>
-    </main>
+    </>
   );
 };
 

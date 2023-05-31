@@ -1,4 +1,4 @@
-import {BASE_URL, TOKEN} from "./consts";
+import {BASE_URL, TOKEN} from "../utils/consts";
 
 class Api {
   constructor({baseUrl, headers}) {

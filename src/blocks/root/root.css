@@ -20,6 +20,11 @@
 @media screen and (max-width: 1023px) {
   .root {
     max-width: 581px;
-    padding: 28px 0 36px 0;
+    padding: 40px 0;
+  }
+}
+@media screen and (max-width: 767px) {
+  .root {
+    padding: 30px 0;
   }
 }
