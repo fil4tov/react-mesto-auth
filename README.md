@@ -4,6 +4,8 @@
 
 ## Используемые технологии
 - React
+- React Lazy
+- React Context
 - React Router Dom
 - БЭМ нейминг
 - Файловая структура БЭМ Nested
