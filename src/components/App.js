@@ -1,5 +1,5 @@
 import {
-  createBrowserRouter, createHashRouter,
+  createBrowserRouter,
   createRoutesFromElements,
   Navigate,
   Route,
@@ -11,7 +11,7 @@ import ProtectedRoute from "../hoc/ProtectedRoute";
 import {AuthProvider, CurrentUserProvider} from "../contexts";
 import {appRoutes} from "../utils/consts";
 
-const router = createHashRouter(createRoutesFromElements(
+const router = createBrowserRouter(createRoutesFromElements(
   <Route element={<Layout/>}>
     <Route index element={<ProtectedRoute element={<HomePage/>}/>}/>
     <Route path={appRoutes.signIn.path} element={<SignInPage/>}/>
