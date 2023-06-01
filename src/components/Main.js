@@ -1,15 +1,15 @@
 import React from 'react';
 import Card from "./Card";
-import {CurrentUserContext} from "../contexts";
+import {CurrentUserContext, CardsContext} from "../contexts";
 
 const Main = ({
   onEditProfile,
   onAddPlace,
   onEditAvatar,
-  cards,
   cardProps
 }) => {
   const {currentUser: {name, avatar, about}} = React.useContext(CurrentUserContext)
+  const {cards} = React.useContext(CardsContext)
 
   return (
     <>

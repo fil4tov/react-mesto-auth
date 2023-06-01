@@ -1,30 +1,28 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 import {useSubmitButton} from "../hooks";
+import {CardsContext} from "../contexts";
 
-const ConfirmDeletePopup = ({isOpen, onClose, onSubmit, cardId, cards, setCards}) => {
+const ConfirmDeletePopup = ({isOpen, onClose, cardId}) => {
+  const {deleteCard, isLoading} = React.useContext(CardsContext)
   const {
-    setIsLoading,
     buttonText,
     setButtonText,
     isSubmitDisabled
   } = useSubmitButton({
     initialText: 'Да',
-    inputsValidity: []
+    isLoading
   })
 
   const handleSubmit = e => {
     e.preventDefault()
-    setIsLoading(true)
     setButtonText('Удаление...')
-    onSubmit(cardId)
+    deleteCard(cardId)
       .then(() => {
-        setCards(cards.filter(card => card._id !== cardId))
         onClose()
       })
       .catch(console.log)
       .finally(() => {
-        setIsLoading(false)
         setButtonText('Да')
       })
   }

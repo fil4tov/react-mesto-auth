@@ -8,7 +8,7 @@ import {
 import Layout from "./Layout";
 import {HomePage, SignUpPage, SignInPage} from "../pages";
 import ProtectedRoute from "../hoc/ProtectedRoute";
-import {AuthProvider, CurrentUserProvider} from "../contexts";
+import {AuthProvider, CurrentUserProvider, CardsProvider} from "../contexts";
 import {appRoutes} from "../utils/consts";
 
 const router = createBrowserRouter(createRoutesFromElements(
@@ -24,7 +24,9 @@ const App = () => {
   return (
     <CurrentUserProvider>
       <AuthProvider>
-        <RouterProvider router={router}/>
+        <CardsProvider>
+          <RouterProvider router={router}/>
+        </CardsProvider>
       </AuthProvider>
     </CurrentUserProvider>
   );

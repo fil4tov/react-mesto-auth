@@ -4,31 +4,28 @@ import {CurrentUserContext} from "../contexts";
 import {useSubmitButton, useValidation} from "../hooks";
 import {Input} from "./ui";
 
-const EditAvatarPopup = ({isOpen, onClose, onSubmit}) => {
-  const {setCurrentUser} = React.useContext(CurrentUserContext)
+const EditAvatarPopup = ({isOpen, onClose}) => {
+  const {updateAvatar, isLoading} = React.useContext(CurrentUserContext)
   const avatar = useValidation('')
   const {
-    setIsLoading,
     buttonText,
     setButtonText,
     isSubmitDisabled
   } = useSubmitButton({
     initialText: 'Сохранить',
-    inputsValidity: [avatar.isValid]
+    inputsValidity: [avatar.isValid],
+    isLoading
   })
 
   const handleSubmit = e => {
     e.preventDefault()
-    setIsLoading(true)
     setButtonText('Сохранение...')
-    onSubmit({avatar: avatar.value})
-      .then(userInfo => {
-        setCurrentUser(userInfo)
+    updateAvatar({avatar: avatar.value})
+      .then(() => {
         handleClose()
       })
       .catch(console.log)
       .finally(() => {
-        setIsLoading(false)
         setButtonText('Сохранить')
       })
   }

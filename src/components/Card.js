@@ -1,5 +1,5 @@
 import React from 'react';
-import {CurrentUserContext} from "../contexts";
+import {CurrentUserContext, CardsContext} from "../contexts";
 import {classNames} from "../utils/helpers";
 
 const Card = React.memo(({
@@ -9,10 +9,10 @@ const Card = React.memo(({
   likes,
   owner,
   onImageClick,
-  onCardLike,
   onCardDelete
 }) => {
   const {currentUser} = React.useContext(CurrentUserContext)
+  const {likeCard} = React.useContext(CardsContext)
   const isOwner = currentUser._id === owner._id
   const isLiked = likes.some(item => item._id === currentUser._id)
 
@@ -25,7 +25,7 @@ const Card = React.memo(({
   }
 
   const handleLikeCard = () => {
-    onCardLike(isLiked, _id)
+    likeCard(isLiked, _id)
   }
 
   return (

@@ -4,18 +4,18 @@ import {CurrentUserContext} from "../contexts";
 import {useSubmitButton, useValidation} from "../hooks";
 import {Input} from "./ui";
 
-const EditProfilePopup = ({isOpen, onClose, onSubmit}) => {
-  const {currentUser, setCurrentUser} = React.useContext(CurrentUserContext)
+const EditProfilePopup = ({isOpen, onClose}) => {
+  const {currentUser, updateUserInfo, isLoading} = React.useContext(CurrentUserContext)
   const name = useValidation('')
   const about = useValidation('')
   const {
-    setIsLoading,
     buttonText,
     setButtonText,
     isSubmitDisabled
   } = useSubmitButton({
     initialText: 'Сохранить',
-    inputsValidity: [name.isValid, about.isValid]
+    inputsValidity: [name.isValid, about.isValid],
+    isLoading
   })
 
   React.useEffect(() => {
@@ -25,16 +25,13 @@ const EditProfilePopup = ({isOpen, onClose, onSubmit}) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    setIsLoading(true)
     setButtonText('Сохранение...')
-    onSubmit({name: name.value, about: about.value})
-      .then(userInfo => {
-        setCurrentUser(userInfo)
+    updateUserInfo({name: name.value, about: about.value})
+      .then(() => {
         onClose()
       })
       .catch(console.log)
       .finally(() => {
-        setIsLoading(false)
         setButtonText('Сохранить')
       })
   }

@@ -2,32 +2,31 @@ import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 import {useSubmitButton, useValidation} from "../hooks";
 import {Input} from "./ui";
+import {CardsContext} from "../contexts";
 
-const AddPlacePopup = ({isOpen, onClose, onSubmit, cards, setCards}) => {
+const AddPlacePopup = ({isOpen, onClose}) => {
+  const {addCard, isLoading} = React.useContext(CardsContext)
   const name = useValidation('')
   const link = useValidation('')
   const {
-    setIsLoading,
     buttonText,
     setButtonText,
     isSubmitDisabled
   } = useSubmitButton({
     initialText: 'Создать',
-    inputsValidity: [name.isValid, link.isValid]
+    inputsValidity: [name.isValid, link.isValid],
+    isLoading
   })
 
   const handleSubmit = e => {
     e.preventDefault()
-    setIsLoading(true)
     setButtonText('Создание...')
-    onSubmit({link: link.value, name: name.value})
-      .then(newCard => {
-        setCards([newCard, ...cards])
+    addCard({link: link.value, name: name.value})
+      .then(() => {
         handleClose()
       })
       .catch(console.log)
       .finally(() => {
-        setIsLoading(false)
         setButtonText('Создать')
       })
   }
