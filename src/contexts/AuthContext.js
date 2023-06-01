@@ -8,10 +8,10 @@ export const AuthProvider = ({children}) => {
   const [isAuth, setIsAuth] = React.useState(false);
   const [user, setUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(true);
-  const hasUserData = React.useRef(false)
+  const [hasToken, setHasToken] = React.useState(() => Boolean(getJWT()));
 
   React.useEffect(() => {
-    if (getJWT() && !hasUserData.current) {
+    if (hasToken) {
       AuthService.checkAuth()
         .then(({data}) => {
           handleCheckAuth(data)
@@ -23,24 +23,25 @@ export const AuthProvider = ({children}) => {
     } else {
       setIsLoading(false)
     }
-  }, [isAuth]);
+  }, [hasToken]);
 
   const handleLogout = () => {
     unsetJWT()
     setUser({})
     setIsAuth(false)
-    hasUserData.current = false
+    setHasToken(false)
   }
 
   const handleLogin = (jwt) => {
     setJWT(jwt)
     setIsAuth(true)
+    setHasToken(true)
   }
 
   const handleCheckAuth = (userData) => {
     setUser(userData)
     setIsAuth(true)
-    hasUserData.current = true
+    setHasToken(true)
   }
 
   const store = React.useMemo(() => {

@@ -13,6 +13,8 @@ const Header = () => {
   const {user, isAuth, handleLogout} = React.useContext(AuthContext)
   const location = useLocation()
 
+  const isMenuVisible = isMenuOpen && isAuth
+
   const handleToggleMenu = () => {
     setIsMenuOpen(prev => !prev)
   }
@@ -32,11 +34,10 @@ const Header = () => {
 
   return (
     <header className={classNames(['header'], {
-      ['header_menu-opened']: isMenuOpen && isAuth
+      ['header_menu-opened']: isMenuVisible
     })}>
-      <a href={appRoutes.home.path}>
-        <img src={headerLogo} alt="Логотип сайта" className="logo"/>
-      </a>
+
+      <img src={headerLogo} alt="Логотип сайта" className="logo"/>
 
       {isAuth
         ? <>
@@ -49,6 +50,7 @@ const Header = () => {
               Выйти
             </button>
           </div>
+
           {isMenuOpen
             ? <CloseIcon onClick={handleToggleMenu} className='header__icon'/>
             : <MenuIcon onClick={handleToggleMenu} className='header__icon'/>}
