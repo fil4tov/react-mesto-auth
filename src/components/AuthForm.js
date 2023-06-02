@@ -15,7 +15,7 @@ const AuthForm = ({onSubmit, title, buttonText, children, hasValidation}) => {
 
     onSubmit({
       email: email.value,
-      password: md5(password.value)
+      password: password.value
     })
   }
 
