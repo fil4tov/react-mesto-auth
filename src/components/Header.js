@@ -10,7 +10,7 @@ const Header = () => {
   const [linkPath, setLinkPath] = React.useState('');
   const [linkText, setLinkText] = React.useState('');
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const {user, isAuth, handleLogout} = React.useContext(AuthContext)
+  const {user, isAuth, logout} = React.useContext(AuthContext)
   const location = useLocation()
 
   const isMenuVisible = isMenuOpen && isAuth
@@ -44,7 +44,7 @@ const Header = () => {
           <div className='header__user-info'>
             <p className='header__email'>{user.email}</p>
             <button
-              onClick={handleLogout}
+              onClick={logout}
               className='button header__button'
             >
               Выйти

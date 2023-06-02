@@ -1,32 +1,21 @@
 import React from 'react';
-import md5 from 'md5'
 import {Link, useNavigate} from "react-router-dom";
 import InfoTooltip from "./InfoTooltip";
-import {ButtonSubmit, Input} from "./ui";
-import {usePopup, useSubmitButton, useValidation} from "../hooks";
-import {AuthService} from "../api/AuthService";
+import {usePopup} from "../hooks";
 import {appRoutes} from "../utils/consts";
 import Loader from "./Loader";
+import AuthForm from "./AuthForm";
+import {AuthContext} from "../contexts";
 
 const Register = () => {
-  const email = useValidation('')
-  const password = useValidation('')
+  const {register, isLoading} = React.useContext(AuthContext)
   const [successful, setSuccessful] = React.useState(false);
-  const [navigatePathOnClose, setNavigatePathOnClose] = React.useState('');
-  const [isLoading, setIsLoading] = React.useState(false);
   const toolTip = usePopup({initialIsOpen: false})
+  const [navigatePathOnClose, setNavigatePathOnClose] = React.useState('');
   const navigate = useNavigate()
-  const {isSubmitDisabled} = useSubmitButton({
-    inputsValidity: [email.isValid, password.isValid]
-  })
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    setIsLoading(true)
-    AuthService.register({
-      email: email.value,
-      password: md5(password.value)
-    })
+  const handleSubmit = ({email, password}) => {
+    register(({email, password}))
       .then(() => {
         toolTip.open()
         setSuccessful(true)
@@ -37,9 +26,6 @@ const Register = () => {
         setSuccessful(false)
         setNavigatePathOnClose(appRoutes.signUp.path)
       })
-      .finally(() => {
-        setIsLoading(false)
-      })
   }
 
   const handleCloseTooltip = () => {
@@ -47,60 +33,18 @@ const Register = () => {
     navigate(navigatePathOnClose)
   }
 
-  React.useEffect(() => {
-    email.ref.current.focus()
-  }, []);
-
   return (
     <>
-      <form
+      <AuthForm
         onSubmit={handleSubmit}
-        className="form"
-        autoComplete="off"
+        title='Регистрация'
+        buttonText='Зарегистрироваться'
+        hasValidation
       >
-        <h2 className="form__title form__title_inverted">Регистрация</h2>
-
-        <Input
-          value={email.value}
-          onChange={email.onChange}
-          ref={email.ref}
-          error={Boolean(email.error)}
-          errorMessage={email.error}
-          inverted
-          type="email"
-          placeholder="Email"
-          required
-        />
-
-        <Input
-          value={password.value}
-          onChange={password.onChange}
-          ref={password.ref}
-          error={Boolean(password.error)}
-          errorMessage={password.error}
-          type="password"
-          placeholder="Пароль"
-          minLength="6"
-          maxLength="20"
-          inverted
-          required
-        />
-
-        <ButtonSubmit
-          disabled={isSubmitDisabled}
-          className='form__submit'
-          inverted
-          type="submit"
-          aria-label='Зарегистрироваться'
-        >
-          Зарегистрироваться
-        </ButtonSubmit>
-
         <Link className='form__link' to={appRoutes.signIn.path}>
           Уже зарегистрированы? Войти
         </Link>
-
-      </form>
+      </AuthForm>
 
       <InfoTooltip
         isOpen={toolTip.isOpen}

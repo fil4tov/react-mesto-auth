@@ -1,31 +1,26 @@
 import React from "react";
 import api from "../api/api";
-import {useContextRequest} from "../hooks";
+import {useRequest} from "../hooks";
 
 export const CurrentUserContext = React.createContext({})
 
 export const CurrentUserProvider = ({children}) => {
+  const {request, isLoading, error} = useRequest({initialLoading: false})
   const [currentUser, setCurrentUser] = React.useState({});
-  const {request, isLoading, error, setError} = useContextRequest()
 
   React.useEffect(() => {
-    api.getUserInfo()
+    request(() => api.getUserInfo())
       .then(setCurrentUser)
-      .catch(setError)
   }, []);
 
   const updateAvatar = React.useCallback(async ({avatar}) => {
-    return await request({
-      fetchCallback: () => api.updateAvatar({avatar}),
-      thenCallback: (userInfo) => setCurrentUser(userInfo)
-    })
+    return await request(() => api.updateAvatar({avatar}))
+      .then((userInfo) => setCurrentUser(userInfo))
   }, [currentUser])
 
   const updateUserInfo = React.useCallback(async ({name, about}) => {
-    return await request({
-      fetchCallback: () => api.updateUserInfo({name, about}),
-      thenCallback: (userInfo) => setCurrentUser(userInfo)
-    })
+    return await request(() => api.updateUserInfo({name, about}))
+      .then((userInfo) => setCurrentUser(userInfo))
   }, [currentUser])
 
   const store = React.useMemo(() => {
