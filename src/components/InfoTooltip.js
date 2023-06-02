@@ -3,7 +3,7 @@ import {usePopupCloseListeners} from "../hooks";
 import {classNames} from "../utils/helpers";
 import {FailIcon, SuccessIcon} from "./ui/Icons";
 
-const InfoTooltip = ({isOpen, onClose, successful, successText, failText}) => {
+const InfoTooltip = ({isOpen, onClose, successful, text}) => {
   const {
     handleCloseOnOverlay,
     onAnimationEnd,
@@ -13,10 +13,6 @@ const InfoTooltip = ({isOpen, onClose, successful, successText, failText}) => {
   const toolTipImg = successful
     ? <SuccessIcon className='tooltip__image'/>
     : <FailIcon className='tooltip__image'/>
-
-  const toolTipText = successful
-    ? successText
-    : failText
 
   return (
     <>
@@ -29,7 +25,7 @@ const InfoTooltip = ({isOpen, onClose, successful, successText, failText}) => {
           <div className="popup__container">
             <div className='tooltip'>
               {toolTipImg}
-              <p className='tooltip__text'>{toolTipText}</p>
+              <p className='tooltip__text'>{text}</p>
               <button
                 onClick={onClose}
                 className="button popup__close"

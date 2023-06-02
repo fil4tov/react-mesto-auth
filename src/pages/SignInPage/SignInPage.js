@@ -4,7 +4,7 @@ import {Navigate} from "react-router-dom";
 import {appRoutes} from "../../utils/consts";
 import {AuthContext} from "../../contexts";
 
-const SignInPage = () => {
+const SignInPage = ({loginProps}) => {
   const {isAuth} = React.useContext(AuthContext)
 
   if (isAuth) {
@@ -13,7 +13,7 @@ const SignInPage = () => {
 
   return (
     <section>
-      <Login/>
+      <Login {...loginProps} />
     </section>
   );
 };
