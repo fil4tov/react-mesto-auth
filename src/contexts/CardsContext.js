@@ -9,7 +9,7 @@ export const CardsProvider = ({children}) => {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    request(() => api.getInitialCards())
+    request(api.getInitialCards)
       .then(setCards)
   }, []);
 

@@ -9,7 +9,7 @@ export const CurrentUserProvider = ({children}) => {
   const [currentUser, setCurrentUser] = React.useState({});
 
   React.useEffect(() => {
-    request(() => api.getUserInfo())
+    request(api.getUserInfo)
       .then(setCurrentUser)
   }, []);
 
