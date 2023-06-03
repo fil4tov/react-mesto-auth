@@ -4,7 +4,7 @@ import {Navigate} from "react-router-dom";
 import {appRoutes} from "../../utils/consts";
 import {AuthContext} from "../../contexts";
 
-const SignUpPage = ({registerProps}) => {
+const SignUpPage = () => {
   const {isAuth} = React.useContext(AuthContext)
 
   if (isAuth) {
@@ -13,7 +13,7 @@ const SignUpPage = ({registerProps}) => {
 
   return (
     <section>
-      <Register {...registerProps} />
+      <Register/>
     </section>
   );
 };

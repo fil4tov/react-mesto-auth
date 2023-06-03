@@ -2,13 +2,15 @@ import {AuthProvider, CardsProvider, CurrentUserProvider} from "../contexts";
 
 const AppContextProvider = ({children}) => {
   return (
-    <CurrentUserProvider>
+    <div>
       <AuthProvider>
-        <CardsProvider>
-          {children}
-        </CardsProvider>
+        <CurrentUserProvider>
+          <CardsProvider>
+            {children}
+          </CardsProvider>
+        </CurrentUserProvider>
       </AuthProvider>
-    </CurrentUserProvider>
+    </div>
   );
 };
 

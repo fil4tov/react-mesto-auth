@@ -1,6 +1,7 @@
 import React from 'react';
 import {ButtonSubmit, Input} from "./ui";
 import {useSubmitButton, useValidation} from "../hooks";
+import md5 from "md5";
 
 const AuthForm = ({onSubmit, title, buttonText, children, hasValidation}) => {
   const email = useValidation('')
@@ -14,7 +15,7 @@ const AuthForm = ({onSubmit, title, buttonText, children, hasValidation}) => {
 
     onSubmit({
       email: email.value,
-      password: password.value
+      password: md5(password.value)
     })
   }
 
